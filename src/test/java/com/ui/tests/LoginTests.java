@@ -2,6 +2,7 @@ package com.ui.tests;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ui.pages.LoginPage;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import utils.Credentials;
@@ -44,9 +45,9 @@ public void getCredentials(){
         Assert.assertEquals(actualUrl, expectedUrl, "Login failed, the URL is not as expected.");
     }
 
-    //Logout and login with invalid credentials
+
     @Test
-    public void loginWithInvalidCredentials(){
+    public void logoutTest(){
         getCredentials();
         String username = credentials.getUsername();
         String password = credentials.getPassword();
@@ -56,5 +57,14 @@ public void getCredentials(){
                 .clickOnLoginButton()
                 .openTheDropDownMenu()
                 .clickOnLogout();
+        String expectedUrl =  "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login";
+        String actualUrl = driver.getCurrentUrl();
+        Assert.assertEquals(actualUrl, expectedUrl, "Login failed, the URL is not as expected.");
+
+    }
+
+    @AfterMethod
+    public void tearDown() {
+        driver.quit();
     }
 }

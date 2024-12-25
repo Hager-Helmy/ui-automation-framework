@@ -60,7 +60,21 @@
       <artifactId>jackson-databind</artifactId>
       <version>2.18.2</version>
     </dependency>
-
-
   </dependencies>
+
+  <profiles>
+  <profile>
+    <id>full</id>
+    <activation>
+      <activeByDefault>true</activeByDefault>
+      <property>
+        <name>environment</name>
+        <value>full</value>
+      </property>
+    </activation>
+    <properties>
+      <testNGSuite>testng.xml</testNGSuite>
+    </properties>
+  </profile>
+</profiles>
 </project>
