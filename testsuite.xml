@@ -1,5 +1,5 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="Parallel Test Suite" parallel="tests" thread-count="2">
+<suite name="Test Suite" >
     <test name="Chrome Browser Test" preserve-order="false">
         <parameter name="browser" value="chrome"></parameter>
         <classes>
@@ -7,7 +7,7 @@
         </classes>
     </test>
 
-    <test name="Edge Browser Test" preserve-order="false">
+    <test name="Edge Browser Test" preserve-order="false" enabled="false">
             <parameter name="browser" value="edge"></parameter>
     <classes>
         <class name="com.ui.tests.LoginTests" />

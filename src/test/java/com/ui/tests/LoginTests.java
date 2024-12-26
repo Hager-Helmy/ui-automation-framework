@@ -24,24 +24,21 @@ public void getCredentials(){
     }
 }
 
-    @BeforeMethod
-    public void setup(){
-        browserSetup();
-    }
+
 //Successful Login
     @Test
     public void validateUserLoginSuccessfully(){
     getCredentials();
     String username = credentials.getUsername();
     String password = credentials.getPassword();
-        LoginPage loginPage = new LoginPage(driver);
+        LoginPage loginPage = new LoginPage(getDriver());
         loginPage.enterUsername(username)
                 .enterPassword(password)
                 .clickOnLoginButton();
 
         // Validate the URL after login
         String expectedUrl = "https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index";
-        String actualUrl = driver.getCurrentUrl();
+        String actualUrl = getDriver().getCurrentUrl();
         Assert.assertEquals(actualUrl, expectedUrl, "Login failed, the URL is not as expected.");
     }
 
@@ -51,20 +48,16 @@ public void getCredentials(){
         getCredentials();
         String username = credentials.getUsername();
         String password = credentials.getPassword();
-        LoginPage loginPage = new LoginPage(driver);
+        LoginPage loginPage = new LoginPage(getDriver());
         loginPage.enterUsername(username)
                 .enterPassword(password)
                 .clickOnLoginButton()
                 .openTheDropDownMenu()
                 .clickOnLogout();
         String expectedUrl =  "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login";
-        String actualUrl = driver.getCurrentUrl();
+        String actualUrl = getDriver().getCurrentUrl();
         Assert.assertEquals(actualUrl, expectedUrl, "Login failed, the URL is not as expected.");
 
     }
 
-    @AfterMethod
-    public void tearDown() {
-        driver.quit();
-    }
 }
