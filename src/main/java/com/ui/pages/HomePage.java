@@ -19,9 +19,11 @@ public class HomePage  {
         return this;
     }
 
-    public LoginPage clickOnLogout(){
+    public LogoutPage clickOnLogout(){
         driver.findElement(logOutButton).click();
-        return new LoginPage(driver);
+        return new LogoutPage(driver);
 
     }
+
+
 }

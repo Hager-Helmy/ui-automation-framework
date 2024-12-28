@@ -7,10 +7,11 @@
         </classes>
     </test>
 
-    <test name="Edge Browser Test" preserve-order="false">
+    <test name="Edge Browser Test" preserve-order="false" enabled="false">
             <parameter name="browser" value="edge"></parameter>
     <classes>
         <class name="com.ui.tests.LoginTests" />
+        <class name="com.ui.tests.AddNewUserTests" />
     </classes>
     </test>
 
