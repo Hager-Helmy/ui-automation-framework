@@ -1,38 +1,33 @@
+# Ignore Maven build directories
 target/
-!.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
-
-### IntelliJ IDEA ###
-.idea/modules.xml
-.idea/jarRepositories.xml
-.idea/compiler.xml
-.idea/libraries/
-*.iws
-*.iml
-*.ipr
-
-### Eclipse ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
-
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
 build/
-!**/src/main/**/build/
-!**/src/test/**/build/
 
-### VS Code ###
-.vscode/
+# IntelliJ IDEA
+.idea/
+*.iml
 
-### Mac OS ###
+# Eclipse project files
+.project
+.classpath
+
+# Allure results folder
+allure-results/
+
+# Operating System-specific files
 .DS_Store
+Thumbs.db
+
+# Log files
+*.log
+
+# Java class files
+*.class
+
+# Compiled application
+*.jar
+*.war
+*.ear
+
+# Other temporary files
+*.swp
+*.swo
