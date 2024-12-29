@@ -4,6 +4,7 @@ import com.ui.pages.LoginPage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import utils.Credentials;
+import io.qameta.allure.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -24,6 +25,7 @@ public void getCredentials(){
 
 
 //Successful Login
+    @Description("Test the Login Functionality")
     @Test
     public void validateUserLoginSuccessfully(){
     getCredentials();
@@ -40,7 +42,7 @@ public void getCredentials(){
         Assert.assertEquals(actualUrl, expectedUrl, "Login failed, the URL is not as expected.");
     }
 
-
+    @Description("Test the Logout Functionality")
     @Test
     public void logoutTest(){
         getCredentials();

@@ -1,5 +1,8 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="Parallel Test Suite" parallel="tests" thread-count="2">
+    <listeners>
+        <listener class-name="io.qameta.allure.testng.AllureTestNg"/>
+    </listeners>
     <test name="Chrome Browser Test" preserve-order="false">
         <parameter name="browser" value="chrome"></parameter>
         <classes>
@@ -14,5 +17,6 @@
         <class name="com.ui.tests.AddNewUserTests" />
     </classes>
     </test>
+
 
 </suite>

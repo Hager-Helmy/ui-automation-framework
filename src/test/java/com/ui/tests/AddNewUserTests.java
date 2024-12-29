@@ -9,10 +9,10 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import utils.Credentials;
-
 import java.io.File;
 import java.io.IOException;
 import java.time.Duration;
+import io.qameta.allure.*;
 
 public class AddNewUserTests extends TestBase {
     private Credentials credentials;
@@ -41,6 +41,7 @@ public class AddNewUserTests extends TestBase {
 
     }
 
+    @Description("Validate add new user functionality")
     @Test
     public void addNewUserTest() {
         AddNewUserPage addNewUserPage = new AddNewUserPage(getDriver());
@@ -52,7 +53,7 @@ public class AddNewUserTests extends TestBase {
                       .selectFromExistingEmployee(2)
                       .openStatusDropDownArrow()
                       .selectFromStatusDropDown("Enabled")
-                      .enterUsername("TestUser78362")
+                      .enterUsername("TestUser78390")
                       .enterPassword("testtesttets4656")
                       .confirmPassword("testtesttets4656")
                       .clickOnSaveButton();

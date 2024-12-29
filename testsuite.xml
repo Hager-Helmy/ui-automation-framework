@@ -1,9 +1,14 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="Test Suite" >
+    <listeners>
+        <listener class-name="io.qameta.allure.testng.AllureTestNg" />
+    </listeners>
+
     <test name="Chrome Browser Test" preserve-order="false">
         <parameter name="browser" value="chrome"></parameter>
         <classes>
             <class name="com.ui.tests.LoginTests" />
+            <class name="com.ui.tests.AddNewUserTests" />
         </classes>
     </test>
 
