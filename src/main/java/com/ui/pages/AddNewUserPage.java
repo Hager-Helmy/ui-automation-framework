@@ -54,8 +54,7 @@ public AddNewUserPage enterEmployeeName(String name){
 }
 public AddNewUserPage selectFromExistingEmployee(int index) {
     By existingEmployeeOption = By.xpath("//div[@role='option'][" + index +"]");
-    wait.until(ExpectedConditions.elementToBeClickable(existingEmployeeOption));
-    driver.findElement(existingEmployeeOption).click();
+    wait.until(ExpectedConditions.presenceOfElementLocated(existingEmployeeOption)).click();
     return this;
 }
 
@@ -86,7 +85,7 @@ public SystemUsersPage clickOnSaveButton(){
     return new SystemUsersPage(driver);
 }
 public String getSuccessMessage(){
-    return driver.findElement(successNotification).getText();
+    return wait.until(ExpectedConditions.visibilityOfElementLocated(successNotification)).getText();
 
 }
 }

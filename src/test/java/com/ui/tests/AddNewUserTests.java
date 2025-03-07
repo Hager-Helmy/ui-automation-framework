@@ -1,71 +1,57 @@
 package com.ui.tests;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ui.pages.AddNewUserPage;
-import com.ui.pages.LoginPage;
+import io.qameta.allure.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import utils.Credentials;
-import java.io.File;
-import java.io.IOException;
 import java.time.Duration;
-import io.qameta.allure.*;
+import java.util.List;
+import utils.JSONFileManager;
+
 
 public class AddNewUserTests extends TestBase {
-    private Credentials credentials;
-    public void getCredentials(){
 
-        ObjectMapper mapper = new ObjectMapper();
-        try {
-            credentials = mapper.readValue(new File("src\\test\\java\\data\\credentials.json"), Credentials.class);
-        } catch (IOException e) {
-            e.printStackTrace();
-            throw new RuntimeException("Failed to load credentials from JSON file.");
-        }
-    }
-
+    JSONFileManager jsonFileManager = new JSONFileManager("data/credentials.json");
     @BeforeMethod
-    public void validateUserLoginSuccessfully(){
-        getCredentials();
-        String username = credentials.getUsername();
-        String password = credentials.getPassword();
-        LoginPage loginPage = new LoginPage(getDriver());
-
-        loginPage.enterUsername(username)
-                .enterPassword(password)
-                .clickOnLoginButton1();
-
-
+    public void setup(){
+        login();
     }
 
-    @Description("Validate add new user functionality")
+    @Feature("Main Feature- Add New User")
+    @Story("Add New User")
+    @Description("This test for validating user is added successfully")
+    @Owner("Hager")
+    @Link(name = "Website",url ="https://opensource-demo.orangehrmlive.com/web/index.php/auth/login" )
     @Test
-    public void addNewUserTest() {
+    public void addNewUserTest() throws InterruptedException {
+        List<String> userRoles = jsonFileManager.getDataAsList("addNewUser.userRole", String.class);
+        List<String> status = jsonFileManager.getDataAsList("addNewUser.employeeStatus", String.class);
+        List<String> employeeName = jsonFileManager.getDataAsList("addNewUser.employeeName", String.class);
+        List<Integer> employeeIndex = jsonFileManager.getDataAsList("addNewUser.existingEmployee", Integer.class);
         AddNewUserPage addNewUserPage = new AddNewUserPage(getDriver());
         addNewUserPage.clickOnAdminButton()
                       .clickOnAddButton()
                       .openUserRoleDropDown()
-                      .selectAdminUserFromDropDown("ESS")
-                      .enterEmployeeName("A")
-                      .selectFromExistingEmployee(2)
+                      .selectAdminUserFromDropDown(userRoles.get(0))
+                      .enterEmployeeName(employeeName.get(0))
+                     .selectFromExistingEmployee(employeeIndex.get(1))
                       .openStatusDropDownArrow()
-                      .selectFromStatusDropDown("Enabled")
-                      .enterUsername("TestUser78390")
-                      .enterPassword("testtesttets4656")
-                      .confirmPassword("testtesttets4656")
+                      .selectFromStatusDropDown(status.get(0))
+                      .enterUsername(jsonFileManager.getDataAsString("addNewUser.userName"))
+                      .enterPassword(jsonFileManager.getDataAsString("addNewUser.password"))
+                      .confirmPassword(jsonFileManager.getDataAsString("addNewUser.password"))
                       .clickOnSaveButton();
         //Assertions
         String expectedSuccessMessage = "Success";
         Assert.assertEquals(addNewUserPage.getSuccessMessage(), expectedSuccessMessage);
 
-        String expectedUrl = "https://opensource-demo.orangehrmlive.com/web/index.php/admin/viewSystemUsers";
+        String expectedUrl = config.getProperty("system.users.url");
         new WebDriverWait(getDriver(), Duration.ofSeconds(10))
                 .until(ExpectedConditions.urlToBe(expectedUrl));
         String actualUrl = getDriver().getCurrentUrl();
-        Assert.assertEquals(actualUrl, expectedUrl);
+                Assert.assertEquals(actualUrl, expectedUrl);
 
     }
 }

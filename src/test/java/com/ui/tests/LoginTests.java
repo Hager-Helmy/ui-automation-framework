@@ -1,62 +1,40 @@
 package com.ui.tests;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ui.pages.LoginPage;
+import com.ui.pages.HomePage;
+import io.qameta.allure.Description;
+import io.qameta.allure.Link;
+import io.qameta.allure.Owner;
+import io.qameta.allure.Step;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import utils.Credentials;
-import io.qameta.allure.*;
-
-import java.io.File;
-import java.io.IOException;
 
 public class LoginTests extends TestBase{
-private Credentials credentials;
-
-public void getCredentials(){
-
-    ObjectMapper mapper = new ObjectMapper();
-    try {
-        credentials = mapper.readValue(new File("src\\test\\java\\data\\credentials.json"), Credentials.class);
-    } catch (IOException e) {
-        e.printStackTrace();
-        throw new RuntimeException("Failed to load credentials from JSON file.");
-    }
-}
-
 
 //Successful Login
-    @Description("Test the Login Functionality")
+    @Description("This test for validating successful Login")
+    @Step("Login")
+    @Owner("Hager")
+    @Link(name = "Website",url ="https://opensource-demo.orangehrmlive.com/web/index.php/auth/login" )
     @Test
     public void validateUserLoginSuccessfully(){
-    getCredentials();
-    String username = credentials.getUsername();
-    String password = credentials.getPassword();
-        LoginPage loginPage = new LoginPage(getDriver());
-        loginPage.enterUsername(username)
-                .enterPassword(password)
-                .clickOnLoginButton();
-
+        login();
         // Validate the URL after login
-        String expectedUrl = "https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index";
+        String expectedUrl = config.getProperty("dashboard.url");
         String actualUrl = getDriver().getCurrentUrl();
         Assert.assertEquals(actualUrl, expectedUrl, "Login failed, the URL is not as expected.");
     }
 
-    @Description("Test the Logout Functionality")
+    @Description("This test for validating successful Logout")
+    @Step("Logout")
+    @Owner("Hager")
+    @Link(name = "Website",url ="https://opensource-demo.orangehrmlive.com/web/index.php/" )
     @Test
-    public void logoutTest(){
-        getCredentials();
-        String username = credentials.getUsername();
-        String password = credentials.getPassword();
-        LoginPage loginPage = new LoginPage(getDriver());
-        loginPage.enterUsername(username)
-                .enterPassword(password)
-                .clickOnLoginButton()
-                .openTheDropDownMenu()
+    public void validateUserLogoutTest(){
+        HomePage homePage = new HomePage(getDriver());
+                 homePage.openTheDropDownMenu()
                 .clickOnLogout();
-        String expectedUrl =  "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login";
+        String expectedUrl = config.getProperty("login.url");
         String actualUrl = getDriver().getCurrentUrl();
-        Assert.assertEquals(actualUrl, expectedUrl, "Login failed, the URL is not as expected.");
+        Assert.assertEquals(actualUrl, expectedUrl, "Logout failed, the URL is not as expected.");
 
     }
 
