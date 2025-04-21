@@ -13,7 +13,7 @@ import java.util.Properties;
 
 
 public class TestBase {
-    JSONFileManager jsonFileManager = new JSONFileManager("data/credentials.json");
+    JSONFileManager jsonFileManager = new JSONFileManager("data/testData.json");
 
     protected static Properties config;
 

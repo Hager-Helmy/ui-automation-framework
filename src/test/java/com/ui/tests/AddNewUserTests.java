@@ -13,7 +13,7 @@ import utils.JSONFileManager;
 
 public class AddNewUserTests extends TestBase {
 
-    JSONFileManager jsonFileManager = new JSONFileManager("data/credentials.json");
+    JSONFileManager jsonFileManager = new JSONFileManager("data/testData.json");
     @BeforeMethod
     public void setup(){
         login();
@@ -34,7 +34,7 @@ public class AddNewUserTests extends TestBase {
         addNewUserPage.clickOnAdminButton()
                       .clickOnAddButton()
                       .openUserRoleDropDown()
-                      .selectAdminUserFromDropDown(userRoles.get(0))
+                      .selectAdminUserFromDropDown(userRoles.get(1))
                       .enterEmployeeName(employeeName.get(0))
                      .selectFromExistingEmployee(employeeIndex.get(1))
                       .openStatusDropDownArrow()

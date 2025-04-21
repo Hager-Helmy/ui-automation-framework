@@ -16,13 +16,13 @@ public class AddNewUserPage {
     }
 //Locators
     private By adminButton = By.xpath("//span[text()='Admin']");
-    private By addButton = By.xpath("//div[@class=\"orangehrm-header-container\"]//button[normalize-space()='Add']");
-    private By userRoleDropDownArrow = By.xpath("//label[normalize-space()='User Role']/ancestor::div[contains(@class, 'oxd-input-group')]//div[contains(@class, 'oxd-select-text--after')]");
-    private By employeeName = By.xpath("//label[normalize-space()='Employee Name']/ancestor::div[contains(@class, 'oxd-input-group')]//input");
-    private By statusDropDownArrow = By.xpath("//label[text()='Status']/ancestor::div[contains(@class, 'oxd-input')]//div[contains(@class, 'oxd-select-text--after')]");
-    private By userName = By.xpath("//label[text()='Username']/ancestor::div[contains(@class, 'oxd-input-group')]//input");
-    private By password = By.xpath("//label[text()='Password']/ancestor::div[contains(@class, 'oxd-input-group')]//input");
-    private By confirmPassword = By.xpath("//label[text()='Confirm Password']/ancestor::div[contains(@class, 'oxd-input-group')]//input");
+    private By addButton = By.xpath("//div[@class=\"orangehrm-header-container\"]//button");
+    private By userRoleDropDownArrow = By.xpath("(//div[contains(@class,'oxd-select-text--after')])[1]");
+    private By employeeName = By.xpath("(//div[contains(@class, 'oxd-input-group')]//input)[1]");
+    private By statusDropDownArrow = By.xpath("(//div[contains(@class,'oxd-select-text--after')])[2]");
+    private By userName = By.xpath("(//div[contains(@class, 'oxd-input-group')]//input)[2]");
+    private By password = By.xpath("(//div[contains(@class, 'oxd-input-group')]//input)[3]");
+    private By confirmPassword = By.xpath("(//div[contains(@class, 'oxd-input-group')]//input)[4]");
     private By saveButton = By.xpath("//div[contains(@class, 'oxd-form-actions')]/button[@type = 'submit']");
     private By successNotification = By.xpath("//div/p[text()='Success']");
 

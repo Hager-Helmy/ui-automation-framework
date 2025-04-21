@@ -101,6 +101,7 @@
           <execution>
             <phase>verify</phase>
             <goals>
+              <goal>report</goal>
               <goal>serve</goal>
             </goals>
           </execution>
